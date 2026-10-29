@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Apresentação</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container-fluid px-0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info w-100 px-3">
+        <a class="navbar-brand" style="font-size: 40px; font-family: Impact, sans-serif;" href="{{ url_for('index') }}">
+            RockFestival
+        </a>
+    </nav>
+
+    <div class="container my-4" style="max-width: 600px;">
+        <h1 class="text-center mb-4">Editar Apresentação</h1>
+
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Nome da Apresentação:</label>
+                <input type="text" class="form-control" name="nome" value="{{ apresentacao.nome }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Data:</label>
+                <input type="date" class="form-control" name="data" value="{{ apresentacao.data.strftime('%Y-%m-%d') }}" required>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Hora de início:</label>
+                    <input type="time" class="form-control" name="hora_inicio" value="{{ apresentacao.hora_inicio.strftime('%H:%M') }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Hora de término:</label>
+                    <input type="time" class="form-control" name="hora_fim" value="{{ apresentacao.hora_fim.strftime('%H:%M') }}" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Palco:</label>
+                <select class="form-control" name="palco_id" required>
+                    {% for palco in palcos %}
+                        <option value="{{ palco.palco_id }}" {% if palco.palco_id == apresentacao.palco_id %}selected{% endif %}>
+                            {{ palco.titulo }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Artista / Banda:</label>
+                <select class="form-control" name="artista_id" required>
+                    {% for artista in artistas %}
+                        <option value="{{ artista.artista_id }}" {% if artista.artista_id == apresentacao.artista_id %}selected{% endif %}>
+                            {{ artista.nome }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-warning w-100 mb-2">Salvar Alterações</button>
+                <a href="{{ url_for('index') }}" class="btn btn-secondary w-100">← Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

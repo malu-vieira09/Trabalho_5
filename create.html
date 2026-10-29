@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Apresentação</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="margin: 0; padding: 0;">
+<div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light bg-info w-100 m-0 px-0">
+  <div class="container-fluid w-100 px-3 m-0">
+        <a class="navbar-brand" style=" font-size: 50px; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;" href="{{ url_for('index') }}">MusicFestival</a>
+  </div>
+</nav>
+
+<div class="container my-4">
+    <div class="form-container">
+        <h1 class="text-center mb-4">Adicionar Apresentação</h1>
+
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Data:</label>
+                <input type="date" class="form-control" name="data" required>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Hora de início:</label>
+                    <input type="time" class="form-control" name="hora_inicio" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Hora de término:</label>
+                    <input type="time" class="form-control" name="hora_fim" required>
+                </div>
+            </div>
+
+<div class="mb-3">
+    <label class="form-label">Palco:</label>
+    <select class="form-select" name="palco_id" required>
+        <option value="">Selecione o palco</option>
+        {% for palco in palcos %}
+            <option value="{{ palco.palco_id }}">
+                {{ palco.titulo }}
+            </option>
+        {% endfor %}
+    </select>
+</div>
+
+
+
+<div class="mb-3">
+    <label class="form-label">Artista:</label>
+    <select class="form-select" name="artista_id" required>
+        <option value="">Selecione o artista</option>
+        {% for artista in artistas %}
+            <option value="{{ artista.artista_id }}">
+                {{ artista.nome }}
+            </option>
+        {% endfor %}
+    </select>
+</div>
+
+
+            <div class="mb-3">
+                <label class="form-label">Contrato ID:</label>
+                <input type="number" class="form-control" name="contrato_id" required>
+            </div>
+
+            <div class="mb-3">
+                    <label class="form-label">Preço:</label>
+                    <input type="number" step="0.01" class="form-control" name="price" required>
+                </div>
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Cadastrar Apresentação</button>
+                <br>
+                <a href="{{ url_for('index') }}" class="btn-secondary-custom">← Voltar para o início</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

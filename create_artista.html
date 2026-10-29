@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Artista</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container my-5">
+    <h1>Cadastrar Artista</h1>
+
+    <form method="POST">
+        <div class="mb-3">
+            <label class="form-label">Nome do artista:</label>
+            <input type="text" name="nome" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Cadastrar Artista
+        </button>
+
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">
+            Voltar
+        </a>
+    </form>
+</div>
+</body>
+</html>
